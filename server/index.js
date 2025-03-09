@@ -3,8 +3,10 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import User from './models/User.js';
+import Lead from './models/Leads.js';
 import Customer from './models/Customer.js';
 import Quotation from './models/Quotation.js';
+import Order from './models/Order.js';
 
 // Initialize app
 const app = express();
@@ -65,7 +67,36 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Update routes
+
+// Add these routes
+app.post("/api/leads", async (req, res) => {
+  try {
+    console.log("Received lead data:", req.body);
+    const newLead = new Lead(req.body);
+    await newLead.save();
+    res.status(201).json({ message: "Lead added successfully!", lead: newLead });
+  } catch (error) {
+    console.error("Error saving lead:", error);
+    res.status(500).json({ 
+      error: "Failed to add lead",
+      details: error.message 
+    });
+  }
+});
+
+app.get("/api/leads", async (req, res) => {
+  try {
+    const leads = await Lead.find().sort({ createdAt: -1 });
+    res.json(leads);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch leads" });
+  }
+});
+
+
+
+
+// Update Customers routes
 app.post("/api/customers", async (req, res) => {
   try {
     const newCustomer = new Customer(req.body);
@@ -103,6 +134,31 @@ app.get("/api/quotations", async (req, res) => {
     res.json(quotations);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch quotations" });
+  }
+});
+
+//Orders Route
+app.post("/api/orders", async (req, res) => {
+  try {
+    console.log("Received order data:", req.body);
+    const newOrder = new Order(req.body);
+    await newOrder.save();
+    res.status(201).json({ message: "Order added successfully!", order: newOrder });
+  } catch (error) {
+    console.error("Error saving order:", error);
+    res.status(500).json({ 
+      error: "Failed to add order",
+      details: error.message 
+    });
+  }
+});
+
+app.get("/api/orders", async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch orders" });
   }
 });
 

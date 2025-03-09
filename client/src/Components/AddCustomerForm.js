@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddCustomerForm = () => {
+const AddCustomerForm = ({ onCustomerAdded }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,7 +11,6 @@ const AddCustomerForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch("http://localhost:5000/api/customers", {
         method: "POST",
@@ -24,6 +23,7 @@ const AddCustomerForm = () => {
       if (response.ok) {
         alert("Customer added successfully!");
         setFormData({ name: '', email: '', phone: '', address: '', state: '' });
+        if (onCustomerAdded) onCustomerAdded();
       } else {
         alert("Failed to add customer.");
       }
@@ -39,8 +39,9 @@ const AddCustomerForm = () => {
 
   return (
     <div className="add-customer-form">
-      <h2>New Customer Registration</h2>
+      <h2>Add Customer</h2>
       <form onSubmit={handleSubmit}>
+        {/* Form fields remain the same */}
         <div className="form-group">
           <label>Full Name:</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />

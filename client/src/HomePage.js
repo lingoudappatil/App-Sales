@@ -11,21 +11,95 @@ const HomePage = ({ setCurrentPage }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState("");
+  const [customerCount, setCustomerCount] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  const fetchCustomerCount = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/customers");
+      if (response.ok) {
+        const customers = await response.json();
+        setCustomerCount(customers.length);
+      }
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (activeContent === "Dashboard") {
+      fetchCustomerCount();
+    }
+  }, [activeContent]);
+
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
-      setCurrentPage("login"); // Use prop from App.js
+      setCurrentPage("login");
+    }
+  };
+
+  const getIcon = (item) => {
+    const icons = {
+      Dashboard: "📊",
+      Lead: "👤",
+      Quotation: "⚙️",
+      Order: "📞",
+      "Add Customer": "➕",
+      Logout: "🚪",
+    };
+    return <span>{icons[item]}</span>;
+  };
+
+  const renderContent = () => {
+    switch (activeContent) {
+      case "Dashboard":
+        return (
+          <div className="dashboard-content">
+            <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities.</p>
+            <div className="stats-container">
+              <div className="stat-box">
+                <h2>Sales Data Overview</h2>
+                <h3>Total Customers</h3>
+                <p>{customerCount}</p>            
+              </div>
+              <div className="stat-box">
+                <h3>Today's Leads</h3>
+                <p>89</p>
+              </div>
+              <div className="stat-box">
+                <h3>Today's Quotations</h3>
+                <p>89</p>
+              </div>
+              <div className="stat-box">
+                <h3>Today Orders</h3>
+                <p>Rs.12</p>
+              </div>
+              <div className="stat-box">
+                <h3>Todays Orders Amount</h3>
+                <p>Rs.45,678 /-</p>
+              </div>
+            </div>
+          </div>
+        );
+      case "Lead":
+        return <Lead />;
+      case "Quotation":
+        return <Quotation />;
+      case "Order":
+        return <Order />;
+      case "Add Customer":
+        return <AddCustomerForm onCustomerAdded={fetchCustomerCount} />;
+      default:
+        return <div>Welcome to the Dashboard Lingouda, This includes Sales Operations</div>;
     }
   };
 
   return (
     <div className={`container ${darkMode ? "dark" : "light"}`}>
-      {/* Top Bar */}
       <div className={`top-bar ${darkMode ? "dark" : "light"}`}>
         <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? "⬅️" : "➡️"}
@@ -52,7 +126,6 @@ const HomePage = ({ setCurrentPage }) => {
       </div>
 
       <div className="content-wrapper">
-        {/* Sidebar */}
         <div className={`sidebar ${sidebarOpen ? "expanded" : "collapsed"}`}>
           <h2 className="logo">{sidebarOpen ? "My Sale App" : "🔷"}</h2>
           <ul className="sidebar-list">
@@ -69,7 +142,6 @@ const HomePage = ({ setCurrentPage }) => {
           </ul>
         </div>
 
-        {/* Main Content */}
         <div className="main-content">
           <h1>{activeContent}</h1>
           {activeContent === "Dashboard" && (
@@ -79,69 +151,11 @@ const HomePage = ({ setCurrentPage }) => {
               </marquee>
             </div>
           )}
-          {renderContent(activeContent)}
+          {renderContent()}
         </div>
       </div>
     </div>
   );
-};
-
-// Helper function to render content
-const renderContent = (activeContent) => {
-  switch (activeContent) {
-    case "Dashboard":
-      return (
-        <div className="dashboard-content">
-          <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities.</p>
-          <div className="stats-container">
-            <div className="stat-box">
-              <h2>Sales Data Overview</h2>
-              <h3>Total Customers</h3>
-              <p>1000</p>            
-            </div>
-            <div className="stat-box">
-              <h3>Today's Leads</h3>
-              <p>89</p>
-            </div>
-            <div className="stat-box">
-              <h3>Today's Quotations</h3>
-              <p>89</p>
-            </div>
-            <div className="stat-box">
-              <h3>Today Orders</h3>
-              <p>Rs.12</p>
-            </div>
-            <div className="stat-box">
-              <h3>Todays Orders Amount</h3>
-              <p>Rs.45,678 /-</p>
-            </div>
-          </div>
-        </div>
-      );
-    case "Lead":
-      return <Lead />;
-    case "Quotation":
-      return <Quotation />;
-    case "Order":
-      return <Order />;
-    case "Add Customer":
-      return <AddCustomerForm />;
-    default:
-      return <div>Welcome to the Dashboard Lingouda, This includes Sales Operations</div>;
-  }
-};
-
-// Helper function for sidebar icons
-const getIcon = (item) => {
-  const icons = {
-    Dashboard: "📊",
-    Lead: "👤",
-    Quotation: "⚙️",
-    Order: "📞",
-    "Add Customer": "➕",
-    Logout: "🚪",
-  };
-  return <span>{icons[item]}</span>;
 };
 
 export default HomePage;

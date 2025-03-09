@@ -6,10 +6,10 @@ const Lead = () => {
     email: '',
     phone: '',
     address: '',
-    state: '' // Added 'state' to initial data
+    state: ''
   });
 
-  const handleSubmit = async (e) => { // Made the function async
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:5000/api/leads', {
@@ -19,22 +19,21 @@ const Lead = () => {
         },
         body: JSON.stringify(formData),
       });
-      
+
+      const responseData = await response.json(); // Parse response
+
       if (!response.ok) {
-        throw new Error('Failed to add lead');
+        throw new Error(responseData.error || "Failed to add lead");
       }
 
-      const data = await response.json();
-      console.log('Lead added:', data);
-      setFormData({ name: '', email: '', phone: '', address: '', state: '' }); // Reset all fields
-      alert('Lead added successfully!');
+      alert("Lead added successfully!");
+      setFormData({ name: '', email: '', phone: '', address: '', state: '' }); // Reset form
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to add lead. Please try again.');
+      console.error("Error adding lead:", error);
+      alert(`Error: ${error.message}`);
     }
   };
 
-  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -46,7 +45,7 @@ const Lead = () => {
         <div className="form-group">
           <label>Full Name:</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-        </div> 
+        </div>
         <div className="form-group">
           <label>Email:</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} required />
