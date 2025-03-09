@@ -39,7 +39,7 @@ const AddCustomerForm = () => {
 
   return (
     <div className="add-customer-form">
-      <h2>Add Customer</h2>
+      <h2>New Customer Registration</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Full Name:</label>
@@ -68,4 +68,5 @@ const AddCustomerForm = () => {
     </div>
   );
 };
+
 export default AddCustomerForm;

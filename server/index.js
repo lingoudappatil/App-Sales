@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import User from './models/User.js';
+import Customer from './models/Customer.js';
 
 // Initialize app
 const app = express();
@@ -62,6 +63,26 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+// Update routes
+app.post("/api/customers", async (req, res) => {
+  try {
+    const newCustomer = new Customer(req.body);
+    await newCustomer.save();
+    res.status(201).json({ message: "Customer added successfully!", customer: newCustomer });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to add customer" });
+  }
+});
+
+app.get("/api/customers", async (req, res) => {
+  try {
+    const customers = await Customer.find();
+    res.json(customers);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch customers" });
+  }
+}); 
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
