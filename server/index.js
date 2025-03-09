@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import User from './models/User.js';
 import Customer from './models/Customer.js';
+import Quotation from './models/Quotation.js';
 
 // Initialize app
 const app = express();
@@ -83,6 +84,27 @@ app.get("/api/customers", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch customers" });
   }
 }); 
+
+
+// Add these routes
+app.post("/api/quotations", async (req, res) => {
+  try {
+    const newQuotation = new Quotation(req.body);
+    await newQuotation.save();
+    res.status(201).json({ message: "Quotation added successfully!", quotation: newQuotation });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to add quotation" });
+  }
+});
+
+app.get("/api/quotations", async (req, res) => {
+  try {
+    const quotations = await Quotation.find().sort({ createdAt: -1 });
+    res.json(quotations);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch quotations" });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

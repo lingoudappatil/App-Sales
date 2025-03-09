@@ -49,7 +49,7 @@ const Quotation = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  return (
+  return(
     <div className="add-customer-form">
       <h2>New Quotation Page for Sale</h2>
       <form onSubmit={handleSubmit}>
