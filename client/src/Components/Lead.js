@@ -20,7 +20,7 @@ const Lead = () => {
         body: JSON.stringify(formData),
       });
 
-      const responseData = await response.json(); // Parse response
+      const responseData = await response.json();
 
       if (!response.ok) {
         throw new Error(responseData.error || "Failed to add lead");
