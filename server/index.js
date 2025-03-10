@@ -22,7 +22,7 @@ app.use(cors());
 app.post('/api/register', async (req, res) => {
   try {
     const { username, email, address, state, password } = req.body;
-    
+
     // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -35,7 +35,7 @@ app.post('/api/register', async (req, res) => {
       email,
       address,
       state,
-      password
+      password,
     });
 
     await newUser.save();
@@ -48,7 +48,7 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { username, password } = req.body;
-    
+
     // Find user
     const user = await User.findOne({ username });
     if (!user) {
@@ -67,98 +67,108 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
-// Add these routes
-app.post("/api/leads", async (req, res) => {
+// Leads routes
+app.post('/api/leads', async (req, res) => {
   try {
-    console.log("Received lead data:", req.body);
+    console.log('Received lead data:', req.body);
     const newLead = new Lead(req.body);
     await newLead.save();
-    res.status(201).json({ message: "Lead added successfully!", lead: newLead });
+    res.status(201).json({ message: 'Lead added successfully!', lead: newLead });
   } catch (error) {
-    console.error("Error saving lead:", error);
-    res.status(500).json({ 
-      error: "Failed to add lead",
-      details: error.message 
+    console.error('Error saving lead:', error);
+    res.status(500).json({
+      error: 'Failed to add lead',
+      details: error.message,
     });
   }
 });
 
-app.get("/api/leads", async (req, res) => {
+app.get('/api/leads', async (req, res) => {
   try {
     const leads = await Lead.find().sort({ createdAt: -1 });
     res.json(leads);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch leads" });
+    res.status(500).json({ error: 'Failed to fetch leads' });
   }
 });
 
-
-
-
-// Update Customers routes
-app.post("/api/customers", async (req, res) => {
+// Customers routes
+app.post('/api/customers', async (req, res) => {
   try {
     const newCustomer = new Customer(req.body);
     await newCustomer.save();
-    res.status(201).json({ message: "Customer added successfully!", customer: newCustomer });
+    res.status(201).json({ message: 'Customer added successfully!', customer: newCustomer });
   } catch (error) {
-    res.status(500).json({ error: "Failed to add customer" });
+    res.status(500).json({ error: 'Failed to add customer' });
   }
 });
 
-app.get("/api/customers", async (req, res) => {
+app.get('/api/customers', async (req, res) => {
   try {
     const customers = await Customer.find();
     res.json(customers);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch customers" });
-  }
-}); 
-
-
-// Add these routes
-app.post("/api/quotations", async (req, res) => {
-  try {
-    const newQuotation = new Quotation(req.body);
-    await newQuotation.save();
-    res.status(201).json({ message: "Quotation added successfully!", quotation: newQuotation });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to add quotation" });
+    res.status(500).json({ error: 'Failed to fetch customers' });
   }
 });
 
-app.get("/api/quotations", async (req, res) => {
+// Quotations routes
+app.post('/api/quotations', async (req, res) => {
+  try {
+    const newQuotation = new Quotation(req.body);
+    await newQuotation.save();
+    res.status(201).json({ message: 'Quotation added successfully!', quotation: newQuotation });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add quotation' });
+  }
+});
+
+app.get('/api/quotations', async (req, res) => {
   try {
     const quotations = await Quotation.find().sort({ createdAt: -1 });
     res.json(quotations);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch quotations" });
+    res.status(500).json({ error: 'Failed to fetch quotations' });
   }
 });
 
-//Orders Route
-app.post("/api/orders", async (req, res) => {
+// Orders Route with customer existence check
+app.post('/api/orders', async (req, res) => {
   try {
-    console.log("Received order data:", req.body);
-    const newOrder = new Order(req.body);
+    const { email, phone } = req.body;
+    console.log('Received order data:', req.body);
+
+    // Check if customer exists
+    const customer = await Customer.findOne({ $or: [{ email }, { phone }] });
+    if (!customer) {
+      return res.status(400).json({ error: 'Customer does not exist in the system' });
+    }
+
+    // If customer exists, create the order
+    const newOrder = new Order({
+      ...req.body,
+      name: customer.name, // Use customer name from the database
+      email: customer.email, // Use verified email from the database
+      phone: customer.phone, // Use verified phone from the database
+    });
+
     await newOrder.save();
-    res.status(201).json({ message: "Order added successfully!", order: newOrder });
+    res.status(201).json({ message: 'Order added successfully!', order: newOrder });
   } catch (error) {
-    console.error("Error saving order:", error);
-    res.status(500).json({ 
-      error: "Failed to add order",
-      details: error.message 
+    console.error('Error saving order:', error);
+    res.status(500).json({
+      error: 'Failed to add order',
+      details: error.message,
     });
   }
 });
 
-app.get("/api/orders", async (req, res) => {
+app.get('/api/orders', async (req, res) => {
   try {
     const orders = await Order.find().sort({ createdAt: -1 });
     res.json(orders);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch orders" });
+    res.status(500).json({ error: 'Failed to fetch orders' });
   }
 });
 

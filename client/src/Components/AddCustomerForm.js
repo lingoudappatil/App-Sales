@@ -69,5 +69,4 @@ const AddCustomerForm = ({ onCustomerAdded }) => {
     </div>
   );
 };
-
 export default AddCustomerForm;
