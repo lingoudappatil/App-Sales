@@ -107,7 +107,8 @@ const HomePage = ({ setCurrentPage }) => {
   // Render content based on active tab
   const renderContent = () => {
     switch (activeContent) {
-      case "Dashboard":
+     // In the Dashboard case of renderContent()
+case "Dashboard":
   return (
     <div className="dashboard-content">
       <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities.</p>
