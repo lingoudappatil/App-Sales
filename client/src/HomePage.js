@@ -108,30 +108,45 @@ const HomePage = ({ setCurrentPage }) => {
   const renderContent = () => {
     switch (activeContent) {
       case "Dashboard":
-        return (
-          <div className="dashboard-content">
-            <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities.</p>
-            <div className="stats-container">
-              <div className="stat-box">
-                <h2>Sales Data Overview</h2>
-                <h3>Total Customers</h3>
-                <p>{customerCount}</p>
-              </div>
-              <div className="stat-box">
-                <h3>Total Leads</h3>
-                <p>{leadsCount}</p>
-              </div>
-              <div className="stat-box">
-                <h3>Total Quotations</h3>
-                <p>{quotationsCount}</p>
-              </div>
-              <div className="stat-box">
-                <h3>Total Orders</h3>
-                <p>{ordersCount}</p>
-              </div>
-            </div>
+  return (
+    <div className="dashboard-content">
+      <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities.</p>
+      <h2 className="section-title">Sales Data Overview</h2>
+      <div className="stats-container">
+        <div className="stat-box customers">
+          <div className="stat-content">
+            <h3>Total Customers</h3>
+            <p className="stat-value">{customerCount}</p>
           </div>
-        );
+          <div className="stat-icon">👥</div>
+        </div>
+        
+        <div className="stat-box leads">
+          <div className="stat-content">
+            <h3>Total Leads</h3>
+            <p className="stat-value">{leadsCount}</p>
+          </div>
+          <div className="stat-icon">📈</div>
+        </div>
+
+        <div className="stat-box quotations">
+          <div className="stat-content">
+            <h3>Total Quotations</h3>
+            <p className="stat-value">{quotationsCount}</p>
+          </div>
+          <div className="stat-icon">📃</div>
+        </div>
+
+        <div className="stat-box orders">
+          <div className="stat-content">
+            <h3>Total Orders</h3>
+            <p className="stat-value">{ordersCount}</p>
+          </div>
+          <div className="stat-icon">📦</div>
+        </div>
+      </div>
+    </div>
+  );
       case "Lead":
         return <Lead />;
       case "Quotation":
