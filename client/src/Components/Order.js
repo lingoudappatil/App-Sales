@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 
 const Order = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     phone: '',
     item: '',
@@ -15,20 +13,16 @@ const Order = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic client-side validation
-    if (!formData.email && !formData.phone) {
-      alert('Please provide either email or phone number');
-      return;
-    }
-
     try {
       const response = await fetch("http://localhost:5000/api/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           ...formData,
-          quantity: Number(formData.quantity),
-          amount: Number(formData.amount)
+          quantity: Number(formData.quantity), // Convert to number
+          amount: Number(formData.amount)     // Convert to number
         }),
       });
 
@@ -40,6 +34,7 @@ const Order = () => {
 
       alert("Order added successfully!");
       setFormData({
+        name: '',
         email: '',
         phone: '',
         item: '',
@@ -49,16 +44,7 @@ const Order = () => {
 
     } catch (error) {
       console.error("Error adding order:", error);
-      if (error.message === 'Customer does not exist in the system') {
-        const shouldAddCustomer = window.confirm(
-          'Customer not found. Would you like to add them now?'
-        );
-        if (shouldAddCustomer) {
-          navigate('/add-customer'); // Adjust route as needed
-        }
-      } else {
-        alert(`Error: ${error.message}`);
-      }
+      alert(`Error: ${error.message}`);
     }
   };
 
@@ -67,27 +53,38 @@ const Order = () => {
   };
 
   return (
-    <div className="add-order-form">
-      <h2>Create New Order</h2>
+    <div className="add-customer-form">
+      <h2>Add Order Details</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Customer Email:</label>
+          <label>Customer Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Email:</label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-group">
-          <label>Customer Phone:</label>
+          <label>Phone:</label>
           <input
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            required
           />
-          <small className="form-text">Provide at least one of email or phone</small>
         </div>
         <div className="form-group">
           <label>Item Name:</label>
@@ -121,9 +118,7 @@ const Order = () => {
             min="0"
           />
         </div>
-        <button type="submit" className="btn-submit">
-          Create Order
-        </button>
+        <button type="submit">Submit Order</button>
       </form>
     </div>
   );
