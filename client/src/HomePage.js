@@ -5,7 +5,7 @@ import Quotation from "./Components/Quotation";
 import AddCustomerForm from "./Components/AddCustomerForm";
 import Order from "./Components/Order";
 
-const HomePage = ({ setCurrentPage }) => {
+const HomePage = ({ setCurrentPage, loggedInUser }) => {
   const [activeContent, setActiveContent] = useState("Dashboard");
   const [darkMode, setDarkMode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
