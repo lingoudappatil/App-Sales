@@ -220,5 +220,4 @@ case "Dashboard":
     </div>
   );
 };
-
 export default HomePage;
