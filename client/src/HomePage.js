@@ -95,10 +95,10 @@ const HomePage = ({ setCurrentPage }) => {
   const getIcon = (item) => {
     const icons = {
       Dashboard: "📊",
-      Lead: "👤",
-      Quotation: "⚙️",
-      Order: "📞",
-      "Add Customer": "➕",
+      Lead: "📈",
+      Quotation: "📃",
+      Order: "📦",
+      "Add Customer": "👤",
       Logout: "🚪",
     };
     return <span>{icons[item]}</span>;
