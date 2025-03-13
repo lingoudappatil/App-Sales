@@ -73,7 +73,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
       console.error("Error fetching orders:", error);
     }
   };
-
   // Fetch all data when Dashboard is active
   useEffect(() => {
     if (activeContent === "Dashboard") {
@@ -129,7 +128,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
                 </div>
                 <div className="stat-icon">📈</div>
               </div>
-
               <div className="stat-box quotations">
                 <div className="stat-content">
                   <h3>Total Quotations</h3>
@@ -137,7 +135,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
                 </div>
                 <div className="stat-icon">📃</div>
               </div>
-
               <div className="stat-box orders">
                 <div className="stat-content">
                   <h3>Total Orders</h3>
