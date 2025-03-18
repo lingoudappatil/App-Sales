@@ -120,7 +120,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
                 </div>
                 <div className="stat-icon">👥</div>
               </div>
-
               <div className="stat-box leads">
                 <div className="stat-content">
                   <h3>Total Leads</h3>
