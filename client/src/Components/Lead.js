@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const Lead = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,7 +7,6 @@ const Lead = () => {
     address: '',
     state: ''
   });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +35,6 @@ const Lead = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   return (
     <div className="add-customer-form">
       <h2>New Lead Registration for Sale</h2>
@@ -69,5 +66,4 @@ const Lead = () => {
     </div>
   );
 };
-
 export default Lead;
