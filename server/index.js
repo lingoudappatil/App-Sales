@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import User from './models/User.js';
-import Lead from './models/Leads.js'; // Corrected import (use Lead instead of Leads)
+import Lead from './models/Leads.js';  // Corrected import (use Lead instead of Leads)
 import Customer from './models/Customer.js';
 import Quotation from './models/Quotation.js';
 import Order from './models/Order.js';
@@ -47,7 +47,6 @@ app.post('/api/register', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 // User Login
 app.post('/api/login', async (req, res) => {
   try {
@@ -84,7 +83,6 @@ app.post('/api/leads', async (req, res) => {
     res.status(500).json({ error: 'Failed to add lead', details: error.message });
   }
 });
-
 app.get('/api/leads', async (req, res) => {
   try {
     const leads = await Lead.find().sort({ createdAt: -1 });
@@ -161,6 +159,7 @@ app.get('/api/orders', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch orders' });
   }
 });
+
 
 // Start server
 const PORT = process.env.PORT || 5000;
