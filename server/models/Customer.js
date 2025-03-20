@@ -8,4 +8,5 @@ const customerSchema = new mongoose.Schema({
   state: { type: String, required: true }
 });
 
+
 export default mongoose.model('Customer', customerSchema);
