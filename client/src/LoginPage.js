@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const LoginPage = ({ goToRegister, goToHome }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -48,7 +49,7 @@ const LoginPage = ({ goToRegister, goToHome }) => {
     </div>
   );
 };
-
+//Styles
 const styles = {
   container: { 
     textAlign: "center", 
