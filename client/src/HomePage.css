@@ -15,7 +15,7 @@
     justify-content: space-between;
     padding: 0 20px;
     color: white;
-    position: relative;
+    position: sticky;
   }
   
   .top-bar.light {
@@ -65,6 +65,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    position: sticky;
   }
   
   .sidebar .logo {
@@ -324,12 +325,12 @@
 .stats-container {
   display: flex;
   flex-wrap: nowrap;
-  gap: 20px;
+  gap: 5px;
   padding: 20px;
   overflow-x: auto;
 }
 
 .stat-box {
   flex: 1;
-  min-width: 250px;
+  min-width: 230px;
 }
