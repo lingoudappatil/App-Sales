@@ -114,7 +114,11 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
       case "Dashboard":
         return (
           <div className="dashboard-content">
+<<<<<<< HEAD
             <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities and Sales Operations.</p>
+=======
+            <p>📊 Welcome to Patil Lingouda's Dashboard! Here you can see an overview of your activities.</p>
+>>>>>>> 202cf7b79f49aea815d970a4a42a04975b26f69e
             <h2 className="section-title">Sales Data Overview</h2>
             <div className="stats-container">
               <div className="stat-box customers">
