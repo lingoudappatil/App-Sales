@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const LoginPage = ({ goToRegister, goToHome }) => {
+  const LoginPage = ({ goToRegister, goToHome }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,6 @@ const LoginPage = ({ goToRegister, goToHome }) => {
       alert(error.response?.data?.message || 'Login failed');
     }
   };
-
   return (
     <div style={styles.container}>
       <h2>Login</h2>

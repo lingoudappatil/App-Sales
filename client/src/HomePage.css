@@ -131,7 +131,7 @@
     background: #444;
   }
   
-  
+
   /* Main Content */
   .main-content {
     flex-grow: 1;
@@ -311,14 +311,14 @@
 }
 
 /* Specific card colors */
-.customers { border-left: 5px solid #3498db; }
-.leads { border-left: 5px solid #2ecc71; }
+.customers { border-left: 5px solid hsl(204, 70%, 49%); }
+.leads { border-left: 5px solid hsl(134, 84%, 52%); }
 .quotations { border-left: 5px solid #f1c40f; }
-.orders { border-left: 5px solid #e74c3c; }
+.orders { border-left: 5px solid #f24734; }
 
 @media (max-width: 768px) {
   .stats-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 3fr;
   }
 }
 
@@ -333,4 +333,5 @@
 .stat-box {
   flex: 1;
   min-width: 230px;
+  min-height: 100%;
 }

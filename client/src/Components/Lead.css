@@ -6,7 +6,7 @@
     background: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .add-customer-form h2 {
     text-align: center;
     color: #333;
@@ -40,7 +40,6 @@
     font-size: 16px;
     cursor: pointer;
   }
-
   button:hover {
     background: #0056b3;
   }

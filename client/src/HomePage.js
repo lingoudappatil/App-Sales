@@ -103,6 +103,10 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
     return <span>{icons[item]}</span>;
   };
 
+
+
+
+  
   // Render content based on active tab
   const renderContent = () => {
     switch (activeContent) {
@@ -110,7 +114,7 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
       case "Dashboard":
         return (
           <div className="dashboard-content">
-            <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities.</p>
+            <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities and Sales Operations.</p>
             <h2 className="section-title">Sales Data Overview</h2>
             <div className="stats-container">
               <div className="stat-box customers">

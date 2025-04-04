@@ -5,7 +5,6 @@ import HomePage from './HomePage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
-
   return (
     <div>
       {currentPage === 'login' && (
@@ -20,13 +19,11 @@ function App() {
           goToLogin={() => setCurrentPage('login')}
           goToHome={() => setCurrentPage('home')}
         />
-      )}
-      
+      )}  
       {currentPage === 'home' && (
         <HomePage setCurrentPage={setCurrentPage} />  // Pass setCurrentPage as prop
       )}
     </div>
   );
 }
-
 export default App;
