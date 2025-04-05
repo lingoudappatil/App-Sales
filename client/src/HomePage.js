@@ -207,7 +207,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
             ))}
           </ul>
         </div>
-
         <div className="main-content">
           <h1>{activeContent}</h1>
           {activeContent === "Dashboard" && (
