@@ -99,9 +99,9 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
       Order: "📦",
       "Add Customer": "👤",
       Logout: "🚪",
-    };
+    };     
     return <span>{icons[item]}</span>;
-  };
+  };HUIUHIUH
 
   // Render content based on active tab
   const renderContent = () => {
@@ -111,7 +111,7 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
         return (
           <div className="dashboard-content">
 
-            <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities and Sales Operations.</p>
+            <p>📊 Welcome to BBBBBB Lingouda's Dashboard! Here you can see an overview of your activities and Sales Operations.</p>
             <h2 className="section-title">Sales Data Overview</h2>
             <div className="stats-container">
               <div className="stat-box customers">
