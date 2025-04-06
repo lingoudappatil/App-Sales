@@ -116,8 +116,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
           <div className="dashboard-content">
 
             <p>📊 Welcome to Lingouda's Dashboard! Here you can see an overview of your activities and Sales Operations.</p>
-            <p>📊 Welcome to Patil Lingouda's Dashboard! Here you can see an overview of your activities.</p>
-
             <h2 className="section-title">Sales Data Overview</h2>
             <div className="stats-container">
               <div className="stat-box customers">
@@ -215,7 +213,7 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
                 📢 Welcome to Sales's Dashboard! Stay updated with the latest information here.
               </marquee>
             </div>
-          )}
+          )} 
           {renderContent()}
         </div>
       </div>
