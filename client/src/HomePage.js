@@ -103,10 +103,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
     return <span>{icons[item]}</span>;
   };
 
-
-
-
-  
   // Render content based on active tab
   const renderContent = () => {
     switch (activeContent) {
