@@ -216,4 +216,5 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
     </div>
   );
 };
+
 export default HomePage;
