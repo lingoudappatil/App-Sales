@@ -11,7 +11,6 @@ const Quotation = () => {
     address: '',
     state: ''
   });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -92,5 +91,4 @@ const Quotation = () => {
     </div>
   );
 };
-
 export default Quotation;
