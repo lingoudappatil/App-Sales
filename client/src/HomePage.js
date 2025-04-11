@@ -82,7 +82,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
       fetchOrdersCount();
     }
   }, [activeContent]);
-
   // Handle logout
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
@@ -110,7 +109,6 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
       case "Dashboard":
         return (
           <div className="dashboard-content">
-
             <p>📊 Welcome to  Lingouda's Dashboard! Here you can see an overview of your activities and Sales Operations.</p>
             <h2 className="section-title">Sales Data Overview</h2>
             <div className="stats-container">
