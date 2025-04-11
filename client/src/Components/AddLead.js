@@ -7,6 +7,7 @@ const Lead = () => {
     address: '',
     state: ''
   });
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -66,4 +67,5 @@ const Lead = () => {
     </div>
   );
 };
+
 export default Lead;
