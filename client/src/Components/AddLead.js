@@ -38,7 +38,7 @@ const Lead = () => {
   };
   return (
     <div className="add-customer-form">
-      <h2>New Lead Registration for Sale</h2>
+      <h2>New Lead Registration for Sales</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Full Name:</label>
