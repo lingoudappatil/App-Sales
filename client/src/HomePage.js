@@ -204,7 +204,7 @@ const HomePage = ({ setCurrentPage, loggedInUser }) => {
           {activeContent === "Dashboard" && (
             <div className="marquee-wrapper">
               <marquee behavior="scroll" direction="left" className="marquee">
-                📢 Welcome to Sales's Dashboard! Stay updated with the latest information here.
+                📢 Welcome to Sales's Dashboard! Stay updated with the latest information here. Thank you for visiting
               </marquee>
             </div>
           )} 
