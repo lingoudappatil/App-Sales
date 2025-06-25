@@ -7,7 +7,7 @@ const RegisterPage = ({ goToLogin, goToHome }) => {
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
   const [password, setPassword] = useState("");
-
+   
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
